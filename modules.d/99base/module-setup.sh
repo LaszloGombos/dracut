@@ -105,6 +105,8 @@ install() {
     ln -sf initrd-release "$initdir"/usr/lib/os-release
     ln -sf initrd-release "$initdir"/etc/os-release
 
+    find "$initdir"
+
     ## save host_devs which we need bring up
     if [[ $hostonly_cmdline == "yes" ]]; then
         if [[ -n ${host_devs[*]} ]]; then
