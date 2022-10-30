@@ -17,7 +17,7 @@ blkid_type() {
             fi
         done)
 
-     echo "gombi $_fs"
+     echo "$_fs"
 }
 
 fsck_ask_reboot() {
