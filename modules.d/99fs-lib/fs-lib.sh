@@ -2,6 +2,24 @@
 
 type getarg > /dev/null 2>&1 || . /lib/dracut-lib.sh
 
+# sudo udevadm test-builtin blkid /sys/block/loop0
+blkid_type() {
+    local _fs
+    local _dev="$1"
+
+    #_fs=$(blkid -s TYPE -o value "$_dev")
+
+    _fs=$(udevadm info --query=env --name="$_dev" \
+        | while read -r line || [ -n "$line" ]; do
+            if str_starts "$line" "ID_FS_TYPE="; then
+                echo "${line#ID_FS_TYPE=}"
+                break
+            fi
+        done)
+
+     echo "gombi $_fs"
+}
+
 fsck_ask_reboot() {
     info "note - fsck suggests reboot, if you"
     info "leave shell, booting will continue normally"

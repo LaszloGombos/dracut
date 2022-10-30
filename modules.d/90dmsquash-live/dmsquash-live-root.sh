@@ -61,7 +61,7 @@ get_check_dev() {
 # Find the right device to run check on
 check_dev=$(get_check_dev "$livedev")
 # CD/DVD media check
-[ -b "$check_dev" ] && fs=$(blkid -s TYPE -o value "$check_dev")
+[ -b "$check_dev" ] && fs=$(blkid_type "$check_dev")
 if [ "$fs" = "iso9660" -o "$fs" = "udf" ]; then
     check="yes"
 fi
@@ -110,7 +110,7 @@ if [ -f "$livedev" ]; then
     esac
     [ -e /sys/fs/"$fstype" ] || modprobe "$fstype"
 else
-    livedev_fstype=$(blkid -o value -s TYPE "$livedev")
+    livedev_fstype=$(blkid_type "$livedev")
     if [ "$livedev_fstype" = "squashfs" ]; then
         # no mount needed - we've already got the LiveOS image in $livedev
         SQUASHED=$livedev
