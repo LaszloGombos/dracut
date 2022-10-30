@@ -111,7 +111,7 @@ if [ -f "$livedev" ]; then
     esac
     [ -e /sys/fs/"$fstype" ] || modprobe "$fstype"
 else
-    livedev_fstype=$(blkid_type "$livedev")
+    livedev_fstype=$(det_fs "$livedev" "auto")
     if [ "$livedev_fstype" = "squashfs" ]; then
         # no mount needed - we've already got the LiveOS image in $livedev
         SQUASHED=$livedev
