@@ -2,12 +2,9 @@
 
 type getarg > /dev/null 2>&1 || . /lib/dracut-lib.sh
 
-# sudo udevadm test-builtin blkid /sys/block/loop0
 blkid_type() {
     local _fs
     local _dev="$1"
-
-    #_fs=$(blkid -s TYPE -o value "$_dev")
 
     _fs=$(udevadm info --query=env --name="$_dev" \
         | while read -r line || [ -n "$line" ]; do
