@@ -2,20 +2,20 @@
 
 type getarg > /dev/null 2>&1 || . /lib/dracut-lib.sh
 
-blkid_type() {
-    local _fs
-    local _dev="$1"
-
-    _fs=$(udevadm info --query=env --name="$_dev" \
-        | while read -r line || [ -n "$line" ]; do
-            if str_starts "$line" "ID_FS_TYPE="; then
-                echo "${line#ID_FS_TYPE=}"
-                break
-            fi
-        done)
-
-     echo "$_fs"
-}
+#blkid_type() {
+#    local _fs
+#    local _dev="$1"
+#
+#    _fs=$(udevadm info --query=env --name="$_dev" \
+#        | while read -r line || [ -n "$line" ]; do
+#            if str_starts "$line" "ID_FS_TYPE="; then
+#                echo "${line#ID_FS_TYPE=}"
+#                break
+#            fi
+#        done)
+#
+#     echo "$_fs"
+#}
 
 fsck_ask_reboot() {
     info "note - fsck suggests reboot, if you"

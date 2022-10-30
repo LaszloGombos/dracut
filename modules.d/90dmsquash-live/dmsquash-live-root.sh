@@ -1,7 +1,7 @@
 #!/bin/sh
 
 type getarg > /dev/null 2>&1 || . /lib/dracut-lib.sh
-type write_fs_tab > /dev/null 2>&1 || . /lib/fs-lib.sh
+type det_fs > /dev/null 2>&1 || . /lib/fs-lib.sh
 
 command -v unpack_archive > /dev/null || . /lib/img-lib.sh
 
@@ -62,7 +62,7 @@ get_check_dev() {
 # Find the right device to run check on
 check_dev=$(get_check_dev "$livedev")
 # CD/DVD media check
-[ -b "$check_dev" ] && fs=$(blkid_type "$check_dev")
+[ -b "$check_dev" ] && fs=$(det_fs "$check_dev" "auto")
 if [ "$fs" = "iso9660" -o "$fs" = "udf" ]; then
     check="yes"
 fi
