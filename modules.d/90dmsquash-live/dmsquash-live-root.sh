@@ -1,6 +1,7 @@
 #!/bin/sh
 
 type getarg > /dev/null 2>&1 || . /lib/dracut-lib.sh
+type write_fs_tab > /dev/null 2>&1 || . /lib/fs-lib.sh
 
 command -v unpack_archive > /dev/null || . /lib/img-lib.sh
 
