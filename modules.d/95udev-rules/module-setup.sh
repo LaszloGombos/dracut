@@ -7,7 +7,7 @@ install() {
     # Fixme: would be nice if we didn't have to guess, which rules to grab....
     # ultimately, /lib/initramfs/rules.d or somesuch which includes links/copies
     # of the rules we want so that we just copy those in would be best
-    inst_multiple udevadm cat uname
+    inst_multiple udevadm cat uname blkid
     inst_dir /etc/udev
     inst_multiple -o /etc/udev/udev.conf
 

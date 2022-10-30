@@ -718,7 +718,7 @@ devnames() {
                 && return 255
             [ -z "$dev" ] && return 255
             ;;
-        #LABEL=*) dev="$(blkid -L "${dev#LABEL=}")" || return 255 ;;
+        LABEL=*) dev="$(blkid -L "${dev#LABEL=}")" || return 255 ;;
         /dev/?*) ;;
         *) return 255 ;;
     esac

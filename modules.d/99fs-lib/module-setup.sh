@@ -86,5 +86,4 @@ install() {
     fi
 
     inst_multiple -o "${_helpers[@]}" fsck
-    #blkid
 }
