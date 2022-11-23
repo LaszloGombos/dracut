@@ -26,7 +26,6 @@ jobs:
             matrix:
                 container: [ ${{ inputs.container }} ]
                 test: [ ${{ inputs.test }} ]
-
         container:
             image: ghcr.io/dracutdevs/${{ matrix.container }}
             options: "--privileged -v /dev:/dev"
