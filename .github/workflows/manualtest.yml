@@ -33,6 +33,5 @@ jobs:
                 uses: actions/checkout@v1
                 with:
                     fetch-depth: 0
-
             -   name: "${{ input.container }} ${{ matrix.test }}"
                 run: ./tools/test-github.sh "TEST-${{ matrix.test }}" ${{ matrix.test }}
