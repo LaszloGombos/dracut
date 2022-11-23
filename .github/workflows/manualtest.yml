@@ -5,7 +5,7 @@ on:
         inputs:
             test:
                 description: 'Test to run'
-                default: '04'
+                default: ['04']
                 required: true
             container:
                 type: choice
@@ -24,10 +24,9 @@ jobs:
         timeout-minutes: 45
         strategy:
             matrix:
-                container: [ ${{ inputs.container }} ]
-                test: [ ${{ inputs.test }} ]
+                test: ${{ fromJSON(github.event.inputs.container) }}
         container:
-            image: ghcr.io/dracutdevs/${{ matrix.container }}
+            image: ghcr.io/dracutdevs/${{ input.container }}
             options: "--privileged -v /dev:/dev"
         steps:
             -   name: "Checkout Repository"
@@ -35,5 +34,5 @@ jobs:
                 with:
                     fetch-depth: 0
 
-            -   name: "${{ matrix.container }} ${{ matrix.test }}"
+            -   name: "${{ input.container }} ${{ matrix.test }}"
                 run: ./tools/test-github.sh "TEST-${{ matrix.test }}" ${{ matrix.test }}
