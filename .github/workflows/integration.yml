@@ -5,7 +5,8 @@ on:
         branches: [ master ]
 
 env:
-  DEBUGFAIL: "${{ runner.debug == '1' && 'rd.debug' }}"
+    DEBUGFAIL: "${{ secrets.ACTIONS_STEP_DEBUG && 'rd.debug' }}"
+#    DEBUGFAIL: 'rd.debug'
 
 jobs:
     basic:

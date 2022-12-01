@@ -13,6 +13,10 @@ export KVERSION=${KVERSION-$(uname -r)}
 #DEBUGFAIL="rd.shell rd.break"
 #DEBUGFAIL="rd.shell"
 #DEBUGOUT="quiet systemd.log_level=debug systemd.log_target=console loglevel=77  rd.info rd.debug"
+
+echo gombi
+echo "$DEBUGFAIL"
+
 DEBUGOUT="loglevel=0 "
 client_run() {
     local test_name="$1"
