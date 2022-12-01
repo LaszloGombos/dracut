@@ -4,6 +4,9 @@ on:
     pull_request:
         branches: [ master ]
 
+env:
+  DEBUGFAIL: "${{ runner.debug == '1' && 'rd.debug' }}"
+
 jobs:
     basic:
         runs-on: ubuntu-latest
