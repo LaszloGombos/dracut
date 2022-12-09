@@ -137,4 +137,4 @@ jobs:
                     fetch-depth: 0
 
             -   name: "${{ matrix.container }} TEST-${{ matrix.test }}"
-                run: ./tools/test-github.sh "TEST-${{ matrix.test }}" ${{ matrix.test }}
+                run: rm -rf /__w/dracut/dracut/modules.d/*systemd* && ./tools/test-github.sh "TEST-${{ matrix.test }}" ${{ matrix.test }}
