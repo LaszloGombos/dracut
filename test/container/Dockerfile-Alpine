@@ -1,6 +1,7 @@
 FROM docker.io/alpine
 
 RUN apk add --no-cache \
+    alpine-sdk \
     asciidoc \
     bash \
     binutils \
