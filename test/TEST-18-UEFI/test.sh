@@ -63,7 +63,7 @@ test_setup() {
 
     "$basedir"/dracut.sh "${DRACUT_ARGS[@]}" \
         --kernel-cmdline "root=/dev/disk/by-id/ata-disk_root ${KERNEL_ARGS[*]}" \
-        --uefi --drivers "sd_mod squashfs" \
+        --uefi --drivers "ahci sd_mod squashfs" \
         "$TESTDIR"/ESP/EFI/BOOT/BOOTX64.efi "$KVERSION" || return 1
 }
 
