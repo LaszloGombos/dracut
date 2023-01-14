@@ -27,7 +27,7 @@ jobs:
             matrix:
                 test: ${{ fromJSON(inputs.test) }}
         container:
-            image: ghcr.io/dracutdevs/${{ inputs.container }}
+            image: ghcr.io/laszlogombos/${{ inputs.container }}
             options: "--privileged -v /dev:/dev"
         steps:
             -   name: "Checkout Repository"
