@@ -1,11 +1,11 @@
 FROM docker.io/gentoo/portage:latest as portage
 
 # kernel and its dependencies in a separate builder
-FROM docker.io/gentoo/stage3:musl as kernel
+FROM docker.io/gentoo/stage3 as kernel
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 RUN emerge -qv sys-kernel/gentoo-kernel-bin
 
-FROM docker.io/gentoo/stage3:musl
+FROM docker.io/gentoo/stage3
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 COPY --from=kernel /boot /boot
 COPY --from=kernel /lib/modules /lib/modules
@@ -16,6 +16,11 @@ ENV container docker
 LABEL RUN="docker run -it --name NAME --privileged --ipc=host --net=host --pid=host -e NAME=NAME -e IMAGE=IMAGE IMAGE"
 
 RUN echo 'export DRACUT_NO_XATTR=1 KVERSION=$(cd /lib/modules; ls -1 | tail -1)' > /etc/profile.d/dracut-test.sh
+
+# systemd-boot on OpenRC
+RUN mkdir -p /etc/portage/package.accept_keywords && \
+    echo "sys-boot/systemd-boot" >> /etc/portage/package.accept_keywords/systemd-boot && \
+    echo '>=sys-apps/systemd-utils-251.10 boot' > /etc/portage/package.use/systemd-boot
 
 # Only install `dmsetup`: attempting to install all of lvm2 fails due to missing kernel headers.
 RUN echo 'sys-fs/lvm2 device-mapper-only -thin' > /etc/portage/package.use/lvm2
@@ -36,6 +41,7 @@ RUN emerge -qv \
     sys-block/nbd \
     sys-block/parted \
     sys-block/thin-provisioning-tools \
+    sys-boot/systemd-boot \
     sys-fs/btrfs-progs \
     sys-fs/dmraid \
     sys-fs/lvm2 \
