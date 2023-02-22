@@ -7,6 +7,8 @@ on:
                 description: "Array of tests to run, such as [11,12]"
                 default: "['04']"
                 required: true
+            env:
+                description: "Enviroment (optional)"
             container:
                 type: choice
                 description: 'distro'
@@ -23,6 +25,7 @@ jobs:
     test:
         runs-on: ubuntu-latest
         timeout-minutes: 45
+        env: ${{ fromJSON(inputs.env) }}
         strategy:
             matrix:
                 test: ${{ fromJSON(inputs.test) }}
