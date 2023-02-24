@@ -8,9 +8,13 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'src/**'
   pull_request:
     branches:
       - master
+    paths:
+      - 'src/**'
 
 permissions:
   contents: read
@@ -29,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ['cpp', 'python']
+        language: ['cpp']
 
     steps:
       - name: Checkout repository
