@@ -264,6 +264,7 @@ static char *convert_abs_rel(const char *from, const char *target)
         return strdup(buf);
 }
 
+
 static int ln_r(const char *src, const char *dst)
 {
         int ret;
