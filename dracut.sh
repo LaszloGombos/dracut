@@ -31,6 +31,8 @@ fi
 
 dracut_args=("$@")
 # shellcheck disable=SC2155
+
+
 readonly dracut_cmd=$(readlink -f "$0")
 
 set -o pipefail
