@@ -33,6 +33,9 @@ jobs:
                     - { dockerfile: 'Dockerfile-Arch',              tag: 'arch:latest' }
                     - { dockerfile: 'Dockerfile-Debian',            tag: 'debian:latest' }
                     - { dockerfile: 'Dockerfile-Gentoo',            tag: 'gentoo:latest' }
+                    - { dockerfile: 'Dockerfile-alpine',            tag: 'alpine:latest' }
+                    - { dockerfile: 'Dockerfile-tiny',              tag: 'tiny:latest' }
+                    - { dockerfile: 'Dockerfile-Debiannosystemd',   tag: 'debiannosystemd:latest' }
         steps:
             -   name: Check out the repo
                 uses: actions/checkout@v3
@@ -52,3 +55,5 @@ jobs:
                     file: test/container/${{ matrix.config.dockerfile }}
                     tags: ghcr.io/${{env.repository_owner}}/${{ matrix.config.tag }}
                     push: ${{ github.event_name == 'push' ||  github.event_name == 'schedule' }}
+                    build-args: |
+                        TAG=latest
