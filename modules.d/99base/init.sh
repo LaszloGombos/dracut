@@ -371,6 +371,10 @@ bv=$(getarg rd.break -d rdbreak) && [ -z "$bv" ] \
 unset bv
 info "Switching root"
 
+mount -t proc -o nosuid,noexec,nodev proc /sysroot/proc
+mount -t devtmpfs -o mode=0755,noexec,nosuid,strictatime devtmpfs /sysroot/dev
+mount -t sysfs -o nosuid,noexec,nodev sysfs /sysroot/sys
+
 unset PS4
 
 PATH=$OLDPATH
